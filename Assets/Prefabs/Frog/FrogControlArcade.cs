@@ -12,7 +12,7 @@ public class FrogControlArcade : MonoBehaviour
     
     void Start()
     {
-        inputWatcher = GetComponent<Vector2>();
+        
     }
 
     void Update()
