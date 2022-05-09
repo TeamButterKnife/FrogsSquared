@@ -38,8 +38,6 @@ public class FrogControllerForce : MonoBehaviour
     public void FixedUpdate()
     {
         // Debug.Log("Fixed Update");
-        // Since I don't
-        // Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         Vector3 movement = new Vector3( movementX, 0.0f, movementY);
         frogRB.AddForce(movement * speed);
     }

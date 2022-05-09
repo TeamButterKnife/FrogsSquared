@@ -9,9 +9,9 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "78438534-c87a-4387-95b8-1182d715651a",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press,MultiTap",
                     "initialStateCheck": true
                 },
                 {
