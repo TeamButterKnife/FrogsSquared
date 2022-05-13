@@ -10,7 +10,6 @@ public class Score : MonoBehaviour
     // TMPro.` textMesh;
     // Text text;
     public int score;
-    public TestSO testSO;
     public ScriptieBoi scriptieBoi;
     private TextMeshProUGUI TMPWord;
     
