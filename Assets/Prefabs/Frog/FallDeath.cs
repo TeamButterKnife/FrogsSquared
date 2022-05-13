@@ -24,7 +24,7 @@ public class FallDeath : MonoBehaviour
             this.transform.position = new Vector2(0,0);
             ScoreBoard.GetComponent<Score>().AddPoint();
 
-            SceneManager.LoadScene("SampleScene");
+            SceneManager.LoadScene("ArcadeMovementTest");
         }
     }
 }

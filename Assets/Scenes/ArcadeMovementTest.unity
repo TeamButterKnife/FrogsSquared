@@ -161,6 +161,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 78749383372013354, guid: e7123927c958beb4b96cc6c097df0913, type: 3}
+      propertyPath: scriptieBoi
+      value: 
+      objectReference: {fileID: 11400000, guid: 5df13320359d21c47970af4069b09616, type: 2}
     - target: {fileID: 3875912691677371538, guid: e7123927c958beb4b96cc6c097df0913, type: 3}
       propertyPath: m_Icon
       value: 
@@ -260,6 +264,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 875205274573336765, guid: da9e128409790bd4e988b166fa34f338, type: 3}
   m_PrefabInstance: {fileID: 1265345027}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1006504327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3875912691677371538, guid: e7123927c958beb4b96cc6c097df0913, type: 3}
+  m_PrefabInstance: {fileID: 738404548}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1265345027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -315,9 +324,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5669530693778839432, guid: da9e128409790bd4e988b166fa34f338, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6673094527394034009, guid: da9e128409790bd4e988b166fa34f338, type: 3}
+      propertyPath: ScoreBoard
+      value: 
+      objectReference: {fileID: 1006504327}
     - target: {fileID: 6673094527394034009, guid: da9e128409790bd4e988b166fa34f338, type: 3}
       propertyPath: fallDistance
       value: -9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8376115772284406834, guid: da9e128409790bd4e988b166fa34f338, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713830934484863826, guid: da9e128409790bd4e988b166fa34f338, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da9e128409790bd4e988b166fa34f338, type: 3}

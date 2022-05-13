@@ -5,10 +5,18 @@ using UnityEngine.InputSystem;
 
 public class FrogControlArcade : MonoBehaviour
 {
-    [SerializeField] float speed;
-    [SerializeField] int jump;
+    [SerializeField] private float speed;
+    [SerializeField] private int jump;
+    [SerializeField] private float distance2GroundFlag; // Here's a flag for tracking distance to ground. 
 
     [SerializeField] Vector2 inputWatcher;
+
+
+
+
+
+    private bool grounded; // If on the ground, grounded is true.
+    private bool doubleJump;  // If true, let player jump again. 
     
     void Start()
     {
@@ -18,6 +26,9 @@ public class FrogControlArcade : MonoBehaviour
     void Update()
     {
         this.transform.position = new Vector2( this.transform.position.x + speed * inputWatcher.x * Time.deltaTime, this.transform.position.y);
+        
+        // Need to check if the player is on the ground or not. 
+        
     }
 
 
@@ -26,6 +37,14 @@ public class FrogControlArcade : MonoBehaviour
         Vector2 movementVector = moveInput.Get<Vector2>();
         inputWatcher = movementVector;
         Debug.Log(movementVector);
+    }
+
+    private void OnJump()
+    {
+        Debug.Log("Jumping");
+        // Need to do jumping here.
+        // This outta be something simple but... Let's do something like
+
     }
 
 }
