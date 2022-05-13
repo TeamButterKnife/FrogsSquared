@@ -23,8 +23,8 @@ public class FallDeath : MonoBehaviour
             // but move first so you don't like... break it.
             this.transform.position = new Vector2(0,0);
             ScoreBoard.GetComponent<Score>().AddPoint();
-
-            SceneManager.LoadScene("ArcadeMovementTest");
+            Scene activeScene = SceneManager.GetActiveScene();
+            SceneManager.LoadScene(activeScene.name);
         }
     }
 }

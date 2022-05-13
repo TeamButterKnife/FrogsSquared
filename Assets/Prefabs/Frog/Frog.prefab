@@ -136,7 +136,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &8323367308185589262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3.7
   jump: 0
+  distance2GroundFlag: 0
   inputWatcher: {x: 0, y: 0}
 --- !u!114 &5669530693778839432
 MonoBehaviour:
@@ -209,3 +210,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallDistance: 0
+  ScoreBoard: {fileID: 0}

@@ -32,19 +32,19 @@ public class FrogControlArcade : MonoBehaviour
     }
 
 
-    private void OnMove(InputValue moveInput)
-    {
-        Vector2 movementVector = moveInput.Get<Vector2>();
-        inputWatcher = movementVector;
-        Debug.Log(movementVector);
-    }
+    //private void OnMove(InputValue moveInput)
+    //{
+    //    Vector2 movementVector = moveInput.Get<Vector2>();
+    //    inputWatcher = movementVector;
+    //    Debug.Log(movementVector);
+    //}
 
-    private void OnJump()
-    {
-        Debug.Log("Jumping");
-        // Need to do jumping here.
-        // This outta be something simple but... Let's do something like
+    //private void OnJump()
+    //{
+    //    //Debug.Log("Jumping");
+    //    // Need to do jumping here.
+    //    // This outta be something simple but... Let's do something like
 
-    }
+    //}
 
 }
