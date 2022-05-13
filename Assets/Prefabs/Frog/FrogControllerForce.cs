@@ -13,10 +13,10 @@ public class FrogControllerForce : MonoBehaviour
     private float movementX;
     private float movementY;
 
-    private int isLimitX, isLimitY;
+    private int isLimitX;
+    private int JUMP_MOD;
 
-    private bool isJumping;
-    private bool isGrounded;
+    [SerializeField] float jumpLimit;
 
     // Private
     private Rigidbody2D frogRB; 
@@ -26,19 +26,20 @@ public class FrogControllerForce : MonoBehaviour
     {
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
         isLimitX = 1;
-        isLimitY = 1;
-        isJumping = false;
+        JUMP_MOD = 2;
     }
 
     public void Update()
     {
-
         // Grounded check
 
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.1f);
+        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
         if (groundCheck.collider is null)
         {
-            Debug.Log("Not on floor");
+            JUMP_MOD = 0;
+        } else
+        {
+            JUMP_MOD = 2;
         }
 
         if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
@@ -48,17 +49,11 @@ public class FrogControllerForce : MonoBehaviour
         {
             isLimitX = 1;
         }
-        if (frogRB.velocity.y > 5f || frogRB.velocity.y < -5f)
-        {
-            isLimitY = 0;
-        } else
-        {
-            isLimitY = 1;
-        }
 
-        Vector3 movement = new Vector3(movementX * isLimitX, movementY * isLimitY, 0f);
-        frogRB.AddForce(movement * speed);
-        //Debug.Log(frogRB.velocity);
+        Vector3 movement = new Vector3(movementX * isLimitX, movementY * JUMP_MOD, 0f);
+        frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
+        if (frogRB.velocity.y > jumpLimit) frogRB.velocity = new Vector2(frogRB.velocity.x, jumpLimit);
+        
     }
 
     private void OnMove(InputValue movementValue)
@@ -66,26 +61,6 @@ public class FrogControllerForce : MonoBehaviour
         Vector2 movementVector  = movementValue.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
-        //Debug.Log(movementVector);
     }
-    
-    private void OnJump()
-    {
-        // if (!isJumping)
-        // {
-        //     movementY = 1f;
-        //     isJumping = true;
-        //     Vector3 movement = new Vector3(0f, movementY , 0f);
-        //     frogRB.AddForce(movement * speed);
-        // } else
-        // {
-        //     movementY = 0f;
-        // }
-        
-
-        
-
-    }
-
     
 }
