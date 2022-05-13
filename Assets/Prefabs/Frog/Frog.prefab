@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8713830934484863826}
   - component: {fileID: 5669530693778839432}
   - component: {fileID: 6673094527394034009}
+  - component: {fileID: 296414331}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Untagged
@@ -99,7 +100,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 875205274573336765}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 99dcd25f17971c64b906603beee2a561, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -132,7 +133,7 @@ Rigidbody2D:
   m_LinearDrag: 2
   m_AngularDrag: 0.05
   m_GravityScale: 4
-  m_Material: {fileID: 6200000, guid: 99dcd25f17971c64b906603beee2a561, type: 2}
+  m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -198,6 +199,7 @@ MonoBehaviour:
   speed: 3.89
   jump: 20
   jumpLimit: 20
+  tongueLimit: 10
 --- !u!114 &6673094527394034009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,5 +212,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08a9caf1a7c32d64c8322bd3057140e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallDistance: -10
+  fallDistance: -300
   ScoreBoard: {fileID: 0}
+--- !u!231 &296414331
+SpringJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875205274573336765}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0.5, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 0.5
+  m_DampingRatio: 0
+  m_Frequency: 1

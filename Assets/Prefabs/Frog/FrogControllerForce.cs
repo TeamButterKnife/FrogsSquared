@@ -17,14 +17,17 @@ public class FrogControllerForce : MonoBehaviour
     private int JUMP_MOD;
 
     [SerializeField] float jumpLimit;
+    [SerializeField] float tongueLimit;
 
     // Private
-    private Rigidbody2D frogRB; 
+    private Rigidbody2D frogRB;
+    private SpringJoint2D frogSJ;
 
     // Start is called before the first frame update
     void Start()
     {
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
+        frogSJ = GetComponent<SpringJoint2D>();
         isLimitX = 1;
         JUMP_MOD = 2;
     }
@@ -63,4 +66,22 @@ public class FrogControllerForce : MonoBehaviour
         movementY = movementVector.y;
     }
     
+    private void OnFire()
+    {
+        RaycastHit2D hitCheck = Physics2D.Raycast(transform.position, Vector2.left, tongueLimit, LayerMask.GetMask("Ground"));
+        Debug.DrawRay(transform.position, Vector2.left, Color.white, 3);
+        if (hitCheck.collider is not null)
+        {
+            Debug.Log("Test");
+            Debug.Log(hitCheck.point);
+            frogSJ.connectedBody = hitCheck.rigidbody;
+            
+            frogSJ.connectedAnchor = hitCheck.transform.InverseTransformPoint(hitCheck.point);
+            frogSJ.enabled = true;
+        } else
+        {
+            Debug.Log("Not tested");
+            frogSJ.enabled = false;
+        }
+    }
 }
