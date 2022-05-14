@@ -28,7 +28,7 @@ public class MagicSky : MonoBehaviour
         float secondsElapsed = (Time.fixedTime - startTime);
         float skyPercentage = (secondsElapsed / gameTimeLimit);
         // skyPercentage /= 100f;
-        Debug.Log(secondsElapsed);
+        // Debug.Log(secondsElapsed);
         if(!doneSwitch)
         {
             if(skyPercentage > (colorSwitchPercentage / 100f))

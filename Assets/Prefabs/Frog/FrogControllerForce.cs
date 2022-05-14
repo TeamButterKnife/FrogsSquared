@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.Animations;
 
 
 public class FrogControllerForce : MonoBehaviour
@@ -22,11 +23,12 @@ public class FrogControllerForce : MonoBehaviour
     [SerializeField] int GROUND_JUMP_STRENGTH = 2;
     private Vector2 JUMP_KICK;
     private float lastJumpTime;
-    [SerializeField] const float JUMP_KICK_STRENGTH = 0.9f;
+    [SerializeField] float JUMP_KICK_STRENGTH = 0.9f;
 
     [SerializeField] float jumpLimit;
     [SerializeField] float tongueLimit;
     [SerializeField] GameObject TongueBulletPrefab;
+    [SerializeField] Animator animator;
 
     // Private
     private Rigidbody2D frogRB;
@@ -39,6 +41,7 @@ public class FrogControllerForce : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
         frogSJ = GetComponent<SpringJoint2D>();
@@ -53,7 +56,7 @@ public class FrogControllerForce : MonoBehaviour
     #region groundchecks
         //Grounded check
 
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
+        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
         RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
         RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
 
@@ -64,6 +67,7 @@ public class FrogControllerForce : MonoBehaviour
             // We are not grounded. Reset jump modifiers and check for walls.
             JUMP_MOD = 0; // If we don't find a wall, we won't be able to jump. Simple.
             JUMP_KICK = Vector2.zero;
+            animator.SetBool("isJumping", true);
             if (!(leftWallCheck.collider is null) && movementY > 0) // Fail silently if not pressing jump
             {
                 JUMP_MOD = WALL_JUMP_STRENGTH;
@@ -78,6 +82,7 @@ public class FrogControllerForce : MonoBehaviour
         {
             JUMP_MOD = GROUND_JUMP_STRENGTH;
             JUMP_KICK = Vector2.zero;
+            animator.SetBool("isJumping", false);
         }
 
         if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
@@ -209,5 +214,11 @@ public class FrogControllerForce : MonoBehaviour
 
         frogSJ.connectedAnchor = contactPoint.collider.transform.InverseTransformPoint(contactPoint.point);
         frogSJ.enabled = true;
+    }
+
+    private void OnJump()
+    {
+        Debug.Log("I'm jumpsing");
+        animator.SetBool("isJumping", true);
     }
 }
