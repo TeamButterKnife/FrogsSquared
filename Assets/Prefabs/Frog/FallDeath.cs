@@ -8,7 +8,6 @@ public class FallDeath : MonoBehaviour
     // Start is called before the first frame update
     [SerializeField] int fallDistance;
     // [SerializeField] GameObject ScoreBoard;
-    private Score score;
     void Start()
     {
         

@@ -54,8 +54,11 @@ public class DetectPlayer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hello world");
-        Player.GetComponent<FrogDeath>().Die();
+        Debug.Log(other.gameObject.name);
+        if(other.gameObject.name == "Frog")
+        {
+            Player.GetComponent<FrogDeath>().Die();
+        }
 
     }
 }

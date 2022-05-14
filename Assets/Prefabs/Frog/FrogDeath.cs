@@ -20,11 +20,11 @@ public class FrogDeath : MonoBehaviour
     public void Die()
     {
         
-            // Die.
-            // but move first so you don't like... break it.
-            this.transform.position = new Vector2(0,0);
-            Scene activeScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(activeScene.name);
+        // Die.
+        // but move first so you don't like... break it.
+        this.transform.position = new Vector2(0,0);
+        Scene activeScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(activeScene.name);
         
     }
 }
