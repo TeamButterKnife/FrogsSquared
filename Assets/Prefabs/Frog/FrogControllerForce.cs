@@ -29,10 +29,12 @@ public class FrogControllerForce : MonoBehaviour
     private Rigidbody2D frogRB;
     private SpringJoint2D frogSJ;
     private Camera camera;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
         frogSJ = GetComponent<SpringJoint2D>();
         camera = FindObjectOfType<Camera>();
@@ -88,6 +90,7 @@ public class FrogControllerForce : MonoBehaviour
 
     public void Update()
     {
+
         Vector3 movement = GetMovement();
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
         if (frogRB.velocity.y > jumpLimit) frogRB.velocity = new Vector2(frogRB.velocity.x, jumpLimit);
@@ -99,6 +102,14 @@ public class FrogControllerForce : MonoBehaviour
         Vector2 movementVector  = movementValue.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
+        if(movementX > 0){
+            spriteRenderer.flipX = false;
+        }else if(movementX == 0){
+            // This just keeps us from changing the flipX value by accident.
+        }else{
+            spriteRenderer.flipX = true;
+            // sp
+        }
     }
     
     private void OnFire()
