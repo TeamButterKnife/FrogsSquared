@@ -41,29 +41,29 @@ public class FrogControllerForce : MonoBehaviour
     {
         // Grounded check
 
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
-        RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
-        RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
-        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, 0.55f, LayerMask.GetMask("Ground"));
+        // RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
+        // RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
+        // RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
+        // RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, 0.55f, LayerMask.GetMask("Ground"));
 
-        Debug.Log(cont);
+        // Debug.Log(cont);
 
-        if (groundCheck.collider is null && leftWallCheck.collider is null && rightWallCheck.collider is null && ceilingCheck.collider is null)
-        {
-            JUMP_MOD = 0;
-            StartCoroutine(JumpStopper());
-        } else
-        {
-            JUMP_MOD = 2;
-        }
+        // if (groundCheck.collider is null && leftWallCheck.collider is null && rightWallCheck.collider is null && ceilingCheck.collider is null)
+        // {
+        //     JUMP_MOD = 0;
+        //     StartCoroutine(JumpStopper());
+        // } else
+        // {
+        //     JUMP_MOD = 2;
+        // }
 
-        if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
-        {
-            isLimitX = 0;
-        } else
-        {
-            isLimitX = 1;
-        }
+        // if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
+        // {
+        //     isLimitX = 0;
+        // } else
+        // {
+        //     isLimitX = 1;
+        // }
 
         Vector3 movement = new Vector3(movementX * isLimitX, movementY * JUMP_MOD, 0f);
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
