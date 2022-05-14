@@ -7,7 +7,7 @@ public class FallDeath : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] int fallDistance;
-    [SerializeField] GameObject ScoreBoard;
+    // [SerializeField] GameObject ScoreBoard;
     private Score score;
     void Start()
     {
@@ -19,12 +19,7 @@ public class FallDeath : MonoBehaviour
     {
         if(this.transform.position.y < fallDistance)
         {
-            // Die.
-            // but move first so you don't like... break it.
-            this.transform.position = new Vector2(0,0);
-            ScoreBoard.GetComponent<Score>().AddPoint();
-            Scene activeScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(activeScene.name);
+            GetComponent<FrogDeath>().Die();
         }
     }
 }
