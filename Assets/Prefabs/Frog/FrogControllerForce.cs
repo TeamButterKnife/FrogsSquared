@@ -18,6 +18,9 @@ public class FrogControllerForce : MonoBehaviour
 
     private int isLimitX;
     private int JUMP_MOD;
+    private Vector2 JUMP_KICK;
+    private float lastJumpTime;
+    [SerializeField] const float JUMP_KICK_STRENGTH = 0.9f;
 
     [SerializeField] float jumpLimit;
     [SerializeField] float tongueLimit;
@@ -39,24 +42,36 @@ public class FrogControllerForce : MonoBehaviour
         JUMP_MOD = 2;
     }
 
-    public void Update()
+    private Vector3 GetMovement()
     {
-        // Grounded check
+    #region groundchecks
+        //Grounded check
 
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
-        RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
-        RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
-        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
+        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
+        RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
+        RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
 
         Debug.Log(cont);
 
-        if (groundCheck.collider is null && leftWallCheck.collider is null && rightWallCheck.collider is null && ceilingCheck.collider is null)
+        if (groundCheck.collider is null)
         {
-            JUMP_MOD = 0;
-            StartCoroutine(JumpStopper());
+            // We are not grounded. Reset jump modifiers and check for walls.
+            JUMP_MOD = 0; // If we don't find a wall, we won't be able to jump. Simple.
+            JUMP_KICK = Vector2.zero;
+            if (!(leftWallCheck.collider is null) && movementY > 0) // Fail silently if not pressing jump
+            {
+                JUMP_MOD = 1;
+                JUMP_KICK = Vector2.right;
+            }
+            else if (!(rightWallCheck.collider is null) && movementY > 0)
+            {
+                JUMP_MOD = 1;
+                JUMP_KICK = Vector3.left;
+            }
         } else
         {
             JUMP_MOD = 2;
+            JUMP_KICK = Vector2.zero;
         }
 
         if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
@@ -66,8 +81,17 @@ public class FrogControllerForce : MonoBehaviour
         {
             isLimitX = 1;
         }
+        #endregion
+        Vector2 movement2d = new Vector2(movementX * isLimitX, movementY * JUMP_MOD);
+        movement2d += JUMP_KICK * JUMP_KICK_STRENGTH;
+        Vector3 movement = new Vector3(movement2d.x, movement2d.y, 0f);
+        return movement;
+    }
 
-        Vector3 movement = new Vector3(movementX * isLimitX, movementY * JUMP_MOD, 0f);
+    public void Update()
+    {
+
+        Vector3 movement = GetMovement();
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
         if (frogRB.velocity.y > jumpLimit) frogRB.velocity = new Vector2(frogRB.velocity.x, jumpLimit);
         
@@ -99,11 +123,11 @@ public class FrogControllerForce : MonoBehaviour
         Vector2 mousePointRelative = camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
 
         RaycastHit2D hitCheck = Physics2D.Raycast(transform.position, GetFacingDirection(mousePointRelative), tongueLimit, LayerMask.GetMask("Ground"));
-        if (hitCheck.collider is not null)
+        if (!(hitCheck.collider is null))
         {
             Debug.Log(hitCheck.point);
             frogSJ.connectedBody = hitCheck.rigidbody;
-            
+
             frogSJ.connectedAnchor = hitCheck.transform.InverseTransformPoint(hitCheck.point);
             frogSJ.enabled = true;
         }
