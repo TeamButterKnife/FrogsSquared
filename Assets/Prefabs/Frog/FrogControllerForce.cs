@@ -18,6 +18,8 @@ public class FrogControllerForce : MonoBehaviour
 
     private int isLimitX;
     private int JUMP_MOD;
+    [SerializeField] int WALL_JUMP_STRENGTH = 1;
+    [SerializeField] int GROUND_JUMP_STRENGTH = 2;
     private Vector2 JUMP_KICK;
     private float lastJumpTime;
     [SerializeField] const float JUMP_KICK_STRENGTH = 0.9f;
@@ -60,17 +62,17 @@ public class FrogControllerForce : MonoBehaviour
             JUMP_KICK = Vector2.zero;
             if (!(leftWallCheck.collider is null) && movementY > 0) // Fail silently if not pressing jump
             {
-                JUMP_MOD = 1;
+                JUMP_MOD = WALL_JUMP_STRENGTH;
                 JUMP_KICK = Vector2.right;
             }
             else if (!(rightWallCheck.collider is null) && movementY > 0)
             {
-                JUMP_MOD = 1;
+                JUMP_MOD = WALL_JUMP_STRENGTH;
                 JUMP_KICK = Vector3.left;
             }
         } else
         {
-            JUMP_MOD = 2;
+            JUMP_MOD = GROUND_JUMP_STRENGTH;
             JUMP_KICK = Vector2.zero;
         }
 
