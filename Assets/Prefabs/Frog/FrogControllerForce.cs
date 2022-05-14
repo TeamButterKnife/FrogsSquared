@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
+using UnityEngine.Animations;
 
 
 public class FrogControllerForce : MonoBehaviour
@@ -22,7 +23,7 @@ public class FrogControllerForce : MonoBehaviour
     [SerializeField] int GROUND_JUMP_STRENGTH = 2;
     private Vector2 JUMP_KICK;
     private float lastJumpTime;
-    [SerializeField] const float JUMP_KICK_STRENGTH = 0.9f;
+    [SerializeField] float JUMP_KICK_STRENGTH = 0.9f;
 
     [SerializeField] float jumpLimit;
     [SerializeField] float tongueLimit;
@@ -53,7 +54,7 @@ public class FrogControllerForce : MonoBehaviour
     #region groundchecks
         //Grounded check
 
-        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
+        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
         RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
         RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
 
