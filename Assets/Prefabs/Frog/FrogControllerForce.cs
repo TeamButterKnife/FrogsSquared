@@ -26,10 +26,12 @@ public class FrogControllerForce : MonoBehaviour
     private Rigidbody2D frogRB;
     private SpringJoint2D frogSJ;
     private Camera camera;
+    private SpriteRenderer spriteRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
         frogSJ = GetComponent<SpringJoint2D>();
         camera = FindObjectOfType<Camera>();
@@ -41,29 +43,29 @@ public class FrogControllerForce : MonoBehaviour
     {
         // Grounded check
 
-        // RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f, LayerMask.GetMask("Ground"));
-        // RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
-        // RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
-        // RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, 0.55f, LayerMask.GetMask("Ground"));
+        RaycastHit2D groundCheck = Physics2D.Raycast(transform.position, Vector2.down, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
+        RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
+        RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
+        RaycastHit2D ceilingCheck = Physics2D.Raycast(transform.position, Vector2.up, 0.55f * transform.localScale.y, LayerMask.GetMask("Ground"));
 
-        // Debug.Log(cont);
+        Debug.Log(cont);
 
-        // if (groundCheck.collider is null && leftWallCheck.collider is null && rightWallCheck.collider is null && ceilingCheck.collider is null)
-        // {
-        //     JUMP_MOD = 0;
-        //     StartCoroutine(JumpStopper());
-        // } else
-        // {
-        //     JUMP_MOD = 2;
-        // }
+        if (groundCheck.collider is null && leftWallCheck.collider is null && rightWallCheck.collider is null && ceilingCheck.collider is null)
+        {
+            JUMP_MOD = 0;
+            StartCoroutine(JumpStopper());
+        } else
+        {
+            JUMP_MOD = 2;
+        }
 
-        // if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
-        // {
-        //     isLimitX = 0;
-        // } else
-        // {
-        //     isLimitX = 1;
-        // }
+        if (frogRB.velocity.x > 5f || frogRB.velocity.x < -5f)
+        {
+            isLimitX = 0;
+        } else
+        {
+            isLimitX = 1;
+        }
 
         Vector3 movement = new Vector3(movementX * isLimitX, movementY * JUMP_MOD, 0f);
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
@@ -76,6 +78,14 @@ public class FrogControllerForce : MonoBehaviour
         Vector2 movementVector  = movementValue.Get<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
+        if(movementX > 0){
+            spriteRenderer.flipX = false;
+        }else if(movementX == 0){
+            // This just keeps us from changing the flipX value by accident.
+        }else{
+            spriteRenderer.flipX = true;
+            // sp
+        }
     }
     
     private void OnFire()
