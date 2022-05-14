@@ -53,7 +53,7 @@ public class FrogControllerForce : MonoBehaviour
         RaycastHit2D leftWallCheck = Physics2D.Raycast(transform.position, Vector2.left, 0.55f, LayerMask.GetMask("Ground"));
         RaycastHit2D rightWallCheck = Physics2D.Raycast(transform.position, Vector2.right, 0.55f, LayerMask.GetMask("Ground"));
 
-        Debug.Log(cont);
+        //Debug.Log(cont);
 
         if (groundCheck.collider is null)
         {
