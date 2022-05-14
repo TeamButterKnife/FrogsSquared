@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1092207555071879220}
   - component: {fileID: 1092207555071879222}
   - component: {fileID: -744006164864058386}
+  - component: {fileID: 4475228531769711862}
   m_Layer: 0
   m_Name: ClampCamera
   m_TagString: MainCamera
@@ -97,3 +98,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7b491a3a6ae9346900fde058196a81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FocusFab: {fileID: 0}
+  zoom: -10
+--- !u!114 &4475228531769711862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092207555071879223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab6500757806b4479021eb0f6f25aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startColor: {r: 0.990566, g: 0.51352197, b: 0, a: 0}
+  midColor: {r: 0.8584906, g: 0.39279994, b: 0.45820597, a: 0}
+  endColor: {r: 0.14998338, g: 0.048860796, b: 0.16981131, a: 0}
+  colorSwitchPercentage: 50
+  gameTimeLimit: 300
+  lerpColor1: {r: 0, g: 0, b: 0, a: 0}
+  lerpColor2: {r: 0, g: 0, b: 0, a: 0}
