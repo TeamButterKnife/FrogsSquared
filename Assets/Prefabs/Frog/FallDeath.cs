@@ -19,7 +19,7 @@ public class FallDeath : MonoBehaviour
     {
         if(this.transform.position.y < fallDistance)
         {
-            //GetComponent<FrogDeath>().Die();
+            GetComponent<FrogDeath>().Die();
         }
     }
 }
