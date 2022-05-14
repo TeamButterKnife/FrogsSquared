@@ -30,24 +30,19 @@ public class MandigueAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (isAwake)
-            StartCoroutine(PatrolPlat());
-    }
+        if (isAwake) {
+            if (GetComponentInChildren<MandigueAwakenTrigger>() is not null)
+                GetComponentInChildren<MandigueAwakenTrigger>().gameObject.SetActive(false);
 
-    IEnumerator PatrolPlat()
-    {
-        Debug.Log(secondsAwake);
-        while (isAwake)
-        {
-            if (secondsAwake >= 60f)
+            if (secondsAwake >= 10000f)
             {
                 isAwake = false;
+                CorrectChildTriggerzone();
             }
             transform.position = Vector2.MoveTowards(transform.position, GetNextPosition(), speed);
-            secondsAwake += .02f;
-            yield return new WaitForSecondsRealtime(20f);
+            secondsAwake += 25f;
         }
     }
 
@@ -63,5 +58,21 @@ public class MandigueAI : MonoBehaviour
             }
         }
         return parentSides[activeSide];
+    }
+
+    private void CorrectChildTriggerzone()
+    {
+        GetComponentInChildren<MandigueAwakenTrigger>(true).gameObject.SetActive(true);
+    }
+
+    public GameObject getParentPlat()
+    {
+        return parentPlat;
+    }
+
+    public void setAwakenStatus(bool isAwakeNew)
+    {
+        isAwake = true;
+        secondsAwake = 0;
     }
 }
