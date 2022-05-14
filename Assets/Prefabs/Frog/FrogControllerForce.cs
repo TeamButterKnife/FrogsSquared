@@ -26,12 +26,15 @@ public class FrogControllerForce : MonoBehaviour
 
     [SerializeField] float jumpLimit;
     [SerializeField] float tongueLimit;
+    [SerializeField] GameObject TongueBulletPrefab;
 
     // Private
     private Rigidbody2D frogRB;
     private SpringJoint2D frogSJ;
     private Camera camera;
     private SpriteRenderer spriteRenderer;
+    private LineRenderer lineRenderer;
+    private GameObject tongueObject;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +43,7 @@ public class FrogControllerForce : MonoBehaviour
         frogRB = GetComponent<Rigidbody2D>(); // get the frog's RB.
         frogSJ = GetComponent<SpringJoint2D>();
         camera = FindObjectOfType<Camera>();
+        lineRenderer = GetComponent<LineRenderer>();
         isLimitX = 1;
         JUMP_MOD = 2;
     }
@@ -97,6 +101,12 @@ public class FrogControllerForce : MonoBehaviour
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
         if (frogRB.velocity.y > jumpLimit) frogRB.velocity = new Vector2(frogRB.velocity.x, jumpLimit);
         
+        if (lineRenderer.enabled)
+        {
+            lineRenderer.SetPosition(0, new Vector2(transform.position.x, transform.position.y + transform.localScale.y/2));
+            lineRenderer.SetPosition(1, tongueObject.transform.position);
+        }
+
     }
 
     private void OnMove(InputValue movementValue)
@@ -116,23 +126,37 @@ public class FrogControllerForce : MonoBehaviour
     
     private void OnFire()
     {
-        if (frogSJ.enabled == true) {
+        if (tongueObject != null)
+        {
+            Destroy(tongueObject);
+            lineRenderer.enabled = false;
             frogSJ.enabled = false;
             return;
         }
+        //if (frogSJ.enabled == true) {
+        //    frogSJ.enabled = false;
+        //    return;
+        //}
         
         //Subtracts mouse position from main character to get accurate values
         Vector2 mousePointRelative = camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
 
-        RaycastHit2D hitCheck = Physics2D.Raycast(transform.position, GetFacingDirection(mousePointRelative), tongueLimit, LayerMask.GetMask("Ground"));
-        if (!(hitCheck.collider is null))
-        {
-            Debug.Log(hitCheck.point);
-            frogSJ.connectedBody = hitCheck.rigidbody;
+        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y/2) + GetFacingDirection(mousePointRelative)*0.5f;
 
-            frogSJ.connectedAnchor = hitCheck.transform.InverseTransformPoint(hitCheck.point);
-            frogSJ.enabled = true;
-        }
+        tongueObject = Instantiate(TongueBulletPrefab, spawnPosition, transform.rotation, transform);
+        tongueObject.GetComponent<Rigidbody2D>().AddForce(GetFacingDirection(mousePointRelative)*10, ForceMode2D.Impulse);
+        
+        lineRenderer.enabled = true;
+        
+        //RaycastHit2D hitCheck = Physics2D.Raycast(transform.position, GetFacingDirection(mousePointRelative), tongueLimit, LayerMask.GetMask("Ground"));
+        //if (!(hitCheck.collider is null))
+        //{
+        //    Debug.Log(hitCheck.point);
+        //    frogSJ.connectedBody = hitCheck.rigidbody;
+
+        //    frogSJ.connectedAnchor = hitCheck.transform.InverseTransformPoint(hitCheck.point);
+        //    frogSJ.enabled = true;
+        //}
     }
 
     public Vector2 GetFacingDirection(Vector2 mouseRelativePosition)
@@ -179,9 +203,11 @@ public class FrogControllerForce : MonoBehaviour
        }
     }
 
-
-    IEnumerator JumpStopper()
+    public void ActivateTongueSpring(ContactPoint2D contactPoint)
     {
-        yield return new WaitForSeconds(.1f);
+        frogSJ.connectedBody = contactPoint.rigidbody;
+
+        frogSJ.connectedAnchor = contactPoint.collider.transform.InverseTransformPoint(contactPoint.point);
+        frogSJ.enabled = true;
     }
 }
