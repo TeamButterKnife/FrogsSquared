@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 3154938429858523949}
   - component: {fileID: 8376115772284406834}
   - component: {fileID: 8323367308185589262}
-  - component: {fileID: 8713830934484863826}
   - component: {fileID: 5669530693778839432}
   - component: {fileID: 6673094527394034009}
   - component: {fileID: 296414331}
+  - component: {fileID: 7660251501796823258}
   m_Layer: 0
   m_Name: Frog
   m_TagString: Untagged
@@ -168,22 +168,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8713830934484863826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875205274573336765}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12f6e420a511bce46b72ab8f1feaf409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3.7
-  jump: 0
-  distance2GroundFlag: 0
-  inputWatcher: {x: 0, y: 0}
 --- !u!114 &5669530693778839432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,3 +218,15 @@ SpringJoint2D:
   m_Distance: 0.1
   m_DampingRatio: 0
   m_Frequency: 1.5
+--- !u!114 &7660251501796823258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875205274573336765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91d6753d922ba0478c2bf1e71fca4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
