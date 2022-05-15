@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 5568672599344720302}
   m_Layer: 0
   m_Name: Frog
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,13 +82,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -135,7 +135,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 6
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -191,6 +191,7 @@ MonoBehaviour:
   jumpLimit: 20
   tongueLimit: 10
   TongueBulletPrefab: {fileID: 8212172071485227445, guid: 11926b5b788b4ec4e9c77b3485f58610, type: 3}
+  animator: {fileID: 0}
 --- !u!114 &6673094527394034009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +338,11 @@ LineRenderer:
   m_Loop: 0
 --- !u!111 &6382911256205457430
 Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875205274573336765}
   m_Enabled: 1
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: 83322e446ec111b4a8ceaf4371e6ee83, type: 2}

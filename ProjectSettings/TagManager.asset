@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -40,6 +41,9 @@ TagManager:
   m_SortingLayers:
   - name: Bg
     uniqueID: 1268354447
+    locked: 0
+  - name: Tiles
+    uniqueID: 3754254629
     locked: 0
   - name: Default
     uniqueID: 0
