@@ -108,7 +108,7 @@ public class FrogControllerForce : MonoBehaviour
         
         if (lineRenderer.enabled)
         {
-            lineRenderer.SetPosition(0, new Vector2(transform.position.x, transform.position.y + transform.localScale.y/2));
+            lineRenderer.SetPosition(0, new Vector2(transform.position.x, transform.position.y + transform.localScale.y/8));
             lineRenderer.SetPosition(1, tongueObject.transform.position);
         }
 
@@ -148,7 +148,7 @@ public class FrogControllerForce : MonoBehaviour
         //Subtracts mouse position from main character to get accurate values
         Vector2 mousePointRelative = camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
 
-        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y/2) + GetFacingDirection(mousePointRelative)*0.5f;
+        Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y/8) + GetFacingDirection(mousePointRelative)*0.5f;
 
         tongueObject = Instantiate(TongueBulletPrefab, spawnPosition, transform.rotation, transform);
         tongueObject.GetComponent<Rigidbody2D>().AddForce(GetFacingDirection(mousePointRelative)*10, ForceMode2D.Impulse);
