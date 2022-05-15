@@ -40,6 +40,8 @@ public class LevelManager : MonoBehaviour
                     player.DeactivateInput();
                     Debug.Log("iterated over an incorrect input system and deactivated it");
                 }
+                Debug.Log(player.gameObject.scene.buildIndex);
+                Debug.Log(gameManager.CurrentLevel);
             }
             if(!(correctInput is null))
             {

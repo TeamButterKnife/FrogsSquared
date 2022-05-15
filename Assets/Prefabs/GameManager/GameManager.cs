@@ -22,8 +22,9 @@ public class GameManager : MonoBehaviour
         if (currentLevel < SceneManager.sceneCountInBuildSettings + 1)
         {
             currentLevel++;
-            SceneManager.LoadSceneAsync(currentLevel, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(currentLevel - 1);
+            SceneManager.LoadSceneAsync(currentLevel, LoadSceneMode.Additive);
+            
         }
         else return;
     }
