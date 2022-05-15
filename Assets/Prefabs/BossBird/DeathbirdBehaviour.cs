@@ -26,33 +26,42 @@ public class DeathbirdBehaviour : MonoBehaviour
             case BossState.Tired:
                 if (timeElapsed >= timeLimitTired)
                 {
+                    timeElapsed = 0f;
                     bossState = BossState.Normal;
                     Debug.Log("State change: " + bossState.ToString());
-                    timeElapsed = 0f;
-                    break;
+                    
                 }
                 break;
             case BossState.Normal:
-                if (timeElapsed > 100000000f)
+                if (timeElapsed >= timeLimitTired)
                 {
+                    timeElapsed = 0f;
                     bossState = BossState.Tired;
                     Debug.Log("State change: " + bossState.ToString());
+                    
                 }
                 break;
             case BossState.Rage:
                 if (timeElapsed >= timeLimitRage)
                 {
-                    bossState = BossState.Normal;
-                    FeatherSpawner[] spawners = GetComponentsInChildren<FeatherSpawner>();
-                    foreach (FeatherSpawner featherSpawner in spawners)
-                        featherSpawner.ResetSpawner();
-                    Debug.Log("State change: " + bossState.ToString());
                     timeElapsed = 0f;
-                    break;
+                    bossState = BossState.Normal;
+                    FeatherSpawner[] spawners = GetComponentsInChildren<FeatherSpawner>(true);
+
+                    foreach (FeatherSpawner featherSpawner in spawners) { 
+                        featherSpawner.ResetSpawner();
+                        if (featherSpawner.gameObject.activeInHierarchy)
+                            featherSpawner.gameObject.SetActive(false);
+                        else
+                            featherSpawner.gameObject.SetActive(true);
+                    }
+                    Debug.Log("State change: " + bossState.ToString());
+                    
                 }
                 break;
         }
-        timeElapsed++;
+        Debug.Log(bossState.ToString() + " state");
+        Debug.Log(timeElapsed++);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -71,6 +80,7 @@ public class DeathbirdBehaviour : MonoBehaviour
         {
             case BossState.Tired:
                 //Deal damage
+                timeElapsed = 0f;
                 healthLeft--;
                 if (healthLeft == 0)
                 {
@@ -79,6 +89,9 @@ public class DeathbirdBehaviour : MonoBehaviour
                     //Kill boss
                     return;
                 }
+                FollowPlayerNonTrigger[] feathers = GetComponentsInChildren<FollowPlayerNonTrigger>(true);
+                foreach (FollowPlayerNonTrigger feather in feathers)
+                    Destroy(feather);
                 //Do not kill boss, go to Rage state
                 bossState = BossState.Rage;
                 BumpPlayer(collision);

@@ -15,8 +15,6 @@ public class FeatherSpawner : MonoBehaviour
     {
         if (transform.parent.GetComponent<DeathbirdBehaviour>().bossState == DeathbirdBehaviour.BossState.Normal && isActive && transform.parent.GetComponentInChildren<FollowPlayerNonTrigger>() is null)
         {
-            //GameObject createdFeather = Instantiate(FeatherPrefab, transform.position, transform.rotation, transform.parent);
-            //createdFeather.GetComponent<FollowPlayerNonTrigger>().SetPlayer(FindObjectOfType<FrogControllerForce>().gameObject);
             created++;
             new WaitForSecondsRealtime(3f);
         }
