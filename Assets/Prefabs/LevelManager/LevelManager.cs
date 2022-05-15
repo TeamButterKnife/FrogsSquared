@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class LevelManager : MonoBehaviour
 {
@@ -23,8 +24,21 @@ public class LevelManager : MonoBehaviour
     {
         if (!isActiveScene)
         {
-            isActiveScene = SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel).isLoaded;
-            SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel));
+            // isActiveScene = SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel).isLoaded;
+            // SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel));
+            PlayerInput[] players = GameObject.FindObjectsOfType<PlayerInput>();
+            foreach(PlayerInput player in players)
+            {
+                if(player.gameObject.scene.buildIndex == gameManager.CurrentLevel)
+                {
+                    player.ActivateInput();
+                    isActiveScene = true;
+                }
+                else
+                {
+                    player.DeactivateInput();
+                }
+            }
         }
     }
 }
