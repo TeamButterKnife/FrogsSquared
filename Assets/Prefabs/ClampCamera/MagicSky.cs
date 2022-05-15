@@ -10,12 +10,14 @@ public class MagicSky : MonoBehaviour
     [SerializeField] Color midColor;
     [SerializeField] Color endColor;
     [SerializeField] int colorSwitchPercentage;
-    [SerializeField] float gameTimeLimit = 300f;
+    float gameTimeLimit;
     [SerializeField] private Color lerpColor1, lerpColor2;
     // Start is called before the first frame update
     void Start()
     {
-        startTime = GameObject.FindObjectOfType<LevelManager>().GetStartTime();
+        LevelManager levelManager = GameObject.FindObjectOfType<LevelManager>();
+        startTime = levelManager.GetStartTime();
+        gameTimeLimit = levelManager.GetTimeLimit();
         cam = transform.GetComponent<Camera>();
         lerpColor1 = startColor;
         lerpColor2 = midColor;
