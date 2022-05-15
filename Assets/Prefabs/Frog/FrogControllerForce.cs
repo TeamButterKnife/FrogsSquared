@@ -101,7 +101,7 @@ public class FrogControllerForce : MonoBehaviour
 
     public void Update()
     {
-
+        animator.SetFloat("speed", Mathf.Abs( GetComponent<Rigidbody2D>().velocity.x));
         Vector3 movement = GetMovement();
         frogRB.AddForce(movement * speed, ForceMode2D.Impulse);
         if (frogRB.velocity.y > jumpLimit) frogRB.velocity = new Vector2(frogRB.velocity.x, jumpLimit);
@@ -128,6 +128,8 @@ public class FrogControllerForce : MonoBehaviour
             // sp
         }
     }
+
+    
     
     private void OnFire()
     {
