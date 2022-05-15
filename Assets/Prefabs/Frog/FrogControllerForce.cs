@@ -10,7 +10,7 @@ public class FrogControllerForce : MonoBehaviour
 {
 
     [SerializeField] float speed = 1.0f;
-    [SerializeField] float jump = 1.0f;
+    [HideInInspector][SerializeField] public float jump = 1.0f;
 
     private float movementX;
     private float movementY;
@@ -25,13 +25,13 @@ public class FrogControllerForce : MonoBehaviour
     private float lastJumpTime;
     [SerializeField] float JUMP_KICK_STRENGTH = 0.9f;
 
-    [SerializeField] float jumpLimit;
+    [HideInInspector][SerializeField] public float jumpLimit;
     [SerializeField] float tongueLimit;
     [SerializeField] GameObject TongueBulletPrefab;
     [SerializeField] Animator animator;
 
     // Private
-    private Rigidbody2D frogRB;
+    [HideInInspector][SerializeField]public Rigidbody2D frogRB;
     private SpringJoint2D frogSJ;
     private Camera camera;
     private SpriteRenderer spriteRenderer;
@@ -222,5 +222,21 @@ public class FrogControllerForce : MonoBehaviour
     {
         Debug.Log("I'm jumpsing");
         animator.SetBool("isJumping", true);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Platform")
+        {
+            transform.parent = other.transform;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if(other.gameObject.tag == "Platform")
+        {
+            transform.parent = null;
+        }
     }
 }
