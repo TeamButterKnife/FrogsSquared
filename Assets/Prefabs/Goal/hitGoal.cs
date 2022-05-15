@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class hitGoal : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class hitGoal : MonoBehaviour
         {
             Debug.Log("You win!");
             // Need to change to the "next" scene. Don't have that next part set up yet.
+            int levelIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(levelIndex + 1);
         }
     }
 }

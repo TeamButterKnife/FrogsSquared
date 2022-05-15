@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/ArcadeMovementTest.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/MainMenu.unity
+    guid: 83d648bbcb02da240856d08934b96296
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 5c25d3bbfe97d7643961832f14871247
+  - enabled: 1
+    path: Assets/Scenes/DevSandbox.unity
+    guid: dfe9e6228bc9c644aac299e155ea1879
+  - enabled: 1
+    path: Assets/Scenes/ForceMovementTest.unity
+    guid: 9bb52b592425186468b77ed80e12d4bd
   m_configObjects: {}
