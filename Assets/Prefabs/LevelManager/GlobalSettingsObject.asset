@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6182b31466c192e429ae7bb7c6589f12, type: 3}
-  m_Name: GlobalClock
+  m_Name: GlobalSettingsObject
   m_EditorClassIdentifier: 

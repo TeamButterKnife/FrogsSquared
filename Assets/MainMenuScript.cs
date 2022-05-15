@@ -9,6 +9,8 @@ using UnityEngine.SceneManagement;
 public class MainMenuScript : MonoBehaviour
 {
     [SerializeField] GameObject Canvas;
+    [SerializeField] GameSettings gameSettings;
+    public int casualTimeLimit, normalTimeLimit, hardTimeLimit;
     // [SerializeField] GameObject CanvasCredits;
     // [SerializeField] GameObject CanvasTips;
     // [SerializeField] GameObject BGimage;
@@ -33,6 +35,26 @@ public class MainMenuScript : MonoBehaviour
         }
     }
 
+    void TryNewGame(GameObject uiElement)
+    {
+        switch(uiElement.name)
+        {
+            case "Casual":
+                gameSettings.GameTimeLimit = casualTimeLimit;
+                Debug.Log("Setting time limit:" + casualTimeLimit);
+                break;
+            case "Normal":
+                gameSettings.GameTimeLimit = normalTimeLimit;
+                break;
+            case "Hard":
+                gameSettings.GameTimeLimit = hardTimeLimit;
+                break;
+            default:
+                return;
+        }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
+
     void GetUIComponent()
     {
         clickData.position = Mouse.current.position.ReadValue();
@@ -46,10 +68,7 @@ public class MainMenuScript : MonoBehaviour
         {
             GameObject uiElement = result.gameObject;
             Debug.Log(uiElement.name);
-            if(uiElement.name == "NewGame")
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-            }
+            TryNewGame(uiElement);
             // if (uiElement.TryGetComponent(out LevelSceneLoader levelSceneLoader))
             //     levelToLoad = levelSceneLoader.GetLevelIndex();
             // if (uiElement.TryGetComponent(out PanelHandler panelHandler))

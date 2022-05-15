@@ -1,8 +1,8 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GlobalTimekeeper", order = 1)]
-public class GlobalTimekeeper : ScriptableObject 
+[CreateAssetMenu(fileName = "Data", menuName = "ScriptableObjects/GameSettings", order = 1)]
+public class GameSettings : ScriptableObject 
 {
     private DateTime gameStartTime;
     private float gameTimeLimit;
