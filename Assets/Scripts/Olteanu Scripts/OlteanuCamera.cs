@@ -11,6 +11,10 @@ public class OlteanuCamera : MonoBehaviour
     private Vector2 lastPos;
     private void Start()
     {
+        if (target is null)
+        {
+            target = FindObjectOfType<FrogControllerForce>().transform;
+        }
         lastPos = transform.position;
     }
     private void Update()
