@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class MagicSky : MonoBehaviour
 {   
-    private float startTime;
+    private DateTime startTime;
     private Camera cam;
     private bool doneSwitch = false;
     [SerializeField] Color startColor;
@@ -16,7 +15,7 @@ public class MagicSky : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.fixedTime;
+        startTime = GameObject.FindObjectOfType<LevelManager>().GetStartTime();
         cam = transform.GetComponent<Camera>();
         lerpColor1 = startColor;
         lerpColor2 = midColor;
@@ -25,7 +24,7 @@ public class MagicSky : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float secondsElapsed = (Time.fixedTime - startTime);
+        float secondsElapsed = (float)((DateTime.Now - startTime).TotalSeconds);
         float skyPercentage = (secondsElapsed / gameTimeLimit);
         // skyPercentage /= 100f;
         // Debug.Log(secondsElapsed);
@@ -38,7 +37,7 @@ public class MagicSky : MonoBehaviour
                 gameTimeLimit -= secondsElapsed;
                 doneSwitch = true;
                 skyPercentage = 0f;
-                startTime = Time.fixedTime;
+                startTime = DateTime.Now;
             }
         }
         cam.backgroundColor = Color.Lerp(lerpColor1, lerpColor2, skyPercentage);
