@@ -5,8 +5,8 @@ using UnityEngine;
 public class OlteanuCamera : MonoBehaviour
 {
     public Transform target;
-    public Transform sprite1, sprite2, sprite3, sprite4;
-    public float sprite2Amount, sprite3Amount, sprite4Amount;
+    public Transform sprite1, sprite2, sprite3, sprite4, sprite5;
+    public float sprite2Amount, sprite3Amount, sprite4Amount, sprite5Amount;
     public float minHeight, maxHeight, minWide, maxWide;
     private Vector2 lastPos;
     private void Start()
@@ -21,6 +21,7 @@ public class OlteanuCamera : MonoBehaviour
         sprite2.position += new Vector3(amountToMove.x , amountToMove.y, 0f) * sprite2Amount;
         sprite3.position += new Vector3(amountToMove.x , amountToMove.y, 0f) * sprite3Amount;
         sprite4.position += new Vector3(amountToMove.x , amountToMove.y, 0f) * sprite4Amount;
+        sprite5.position += new Vector3(amountToMove.x , amountToMove.y, 0f) * sprite5Amount;
         lastPos = transform.position;
     }
 }
