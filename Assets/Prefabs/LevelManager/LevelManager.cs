@@ -8,6 +8,10 @@ public class LevelManager : MonoBehaviour
     public float GetTimeLimit() => gameClock.GameTimeLimit;
     private void Awake()
     {
+        if(gameClock.GameStartTime.Year < 2022)
+        {
+            gameClock.SetStartTime();
+        }
         Debug.Log(gameClock.GameStartTime);
     }
 }
