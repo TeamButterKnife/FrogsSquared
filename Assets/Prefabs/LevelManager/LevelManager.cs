@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] GlobalTimekeeper gameClock;
+    [SerializeField] GameSettings gameClock;
     public DateTime GetStartTime() => gameClock.GameStartTime;
     public float GetTimeLimit() => gameClock.GameTimeLimit;
     private void Awake()

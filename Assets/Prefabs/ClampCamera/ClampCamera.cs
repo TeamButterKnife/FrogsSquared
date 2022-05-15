@@ -10,7 +10,10 @@ public class ClampCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (FocusFab is null)
+        {
+            FocusFab = FindObjectOfType<FrogControllerForce>().gameObject;
+        }
     }
 
     // Update is called once per frame

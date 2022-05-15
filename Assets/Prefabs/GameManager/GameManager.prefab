@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb34c7d7179c5849aeab584c0f39eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameClock: {fileID: 11400000, guid: 769b7339eaefbb3478b6c484102d88c8, type: 2}
+  gameSettings: {fileID: 11400000, guid: 769b7339eaefbb3478b6c484102d88c8, type: 2}
   gameTimeLimit: 300
+  currentLevel: 0
