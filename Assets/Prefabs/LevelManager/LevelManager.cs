@@ -27,17 +27,25 @@ public class LevelManager : MonoBehaviour
             // isActiveScene = SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel).isLoaded;
             // SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel));
             PlayerInput[] players = GameObject.FindObjectsOfType<PlayerInput>();
+            PlayerInput correctInput = null;
             foreach(PlayerInput player in players)
             {
                 if(player.gameObject.scene.buildIndex == gameManager.CurrentLevel)
                 {
-                    player.ActivateInput();
-                    isActiveScene = true;
+                    Debug.Log("found the correct input system");
+                    correctInput = player;
                 }
                 else
                 {
                     player.DeactivateInput();
+                    Debug.Log("iterated over an incorrect input system and deactivated it");
                 }
+            }
+            if(!(correctInput is null))
+            {
+                correctInput.ActivateInput();
+                Debug.Log("activated the correct input");
+                isActiveScene = true;
             }
         }
     }
