@@ -1115,11 +1115,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1400117030, guid: 42db01c86311e684abfc23760733f86e, type: 3}
       propertyPath: timeLimitRage
-      value: 100
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 1400117030, guid: 42db01c86311e684abfc23760733f86e, type: 3}
       propertyPath: timeLimitTired
-      value: 500
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 1621804762904245341, guid: 42db01c86311e684abfc23760733f86e, type: 3}
       propertyPath: m_Name
