@@ -178,6 +178,10 @@ PrefabInstance:
       propertyPath: gameClock
       value: 
       objectReference: {fileID: 11400000, guid: 769b7339eaefbb3478b6c484102d88c8, type: 2}
+    - target: {fileID: 3723770865887487430, guid: 850d547f69be98f4c922062e8e36fd6d, type: 3}
+      propertyPath: gameTimeLimit
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6050316454125166697, guid: 850d547f69be98f4c922062e8e36fd6d, type: 3}
       propertyPath: m_Name
       value: GameManager

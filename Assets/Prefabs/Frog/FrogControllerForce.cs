@@ -30,11 +30,11 @@ public class FrogControllerForce : MonoBehaviour
     [SerializeField] GameObject TongueBulletPrefab;
     [SerializeField] Animator animator;
 
+    public SpriteRenderer spriteRenderer { get; private set; }
     // Private
     [HideInInspector][SerializeField]public Rigidbody2D frogRB;
     private SpringJoint2D frogSJ;
     private Camera camera;
-    private SpriteRenderer spriteRenderer;
     private LineRenderer lineRenderer;
     private GameObject tongueObject;
 
@@ -220,7 +220,7 @@ public class FrogControllerForce : MonoBehaviour
 
     private void OnJump()
     {
-        Debug.Log("I'm jumpsing");
+        //Debug.Log("I'm jumpsing");
         animator.SetBool("isJumping", true);
     }
 

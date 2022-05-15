@@ -13,7 +13,6 @@ public class MandigueAwakenTrigger : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("Enabled"); 
         mandigAI = GetComponentInParent<MandigueAI>(true);
         transform.localPosition = (mandigAI.transform.InverseTransformPoint(mandigAI.getParentPlat().transform.position));
     }
