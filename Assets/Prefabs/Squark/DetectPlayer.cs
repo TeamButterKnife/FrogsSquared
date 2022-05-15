@@ -59,6 +59,5 @@ public class DetectPlayer : MonoBehaviour
         {
             Player.GetComponent<FrogDeath>().Die();
         }
-
     }
 }
