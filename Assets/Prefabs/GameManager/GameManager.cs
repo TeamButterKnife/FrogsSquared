@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameSettings gameSettings;
     [SerializeField] private float gameTimeLimit;
     [SerializeField] private int currentLevel;
+
+    public int CurrentLevel { get => currentLevel; }
+
     void Awake()
     {
         gameSettings.SetStartTime();
@@ -23,11 +26,5 @@ public class GameManager : MonoBehaviour
             SceneManager.UnloadSceneAsync(currentLevel - 1);
         }
         else return;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
