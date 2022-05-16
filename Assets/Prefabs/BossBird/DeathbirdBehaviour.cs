@@ -5,9 +5,13 @@ using UnityEngine;
 public class DeathbirdBehaviour : MonoBehaviour
 {
     public BossState bossState { get; private set; }
+    public SpriteRenderer spriteRenderer;
+    public GameObject Player;
+    public float differential;
     [SerializeField] int healthLeft = 3;
 
     float timeElapsed;
+    public Sprite[] sprites = new Sprite[4];
 
     [SerializeField] float timeLimitTired;
     [SerializeField] float timeLimitRage;
@@ -15,7 +19,35 @@ public class DeathbirdBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         bossState = BossState.Normal;
+    }
+
+    void Update()
+    {
+        if(Player.transform.position.x - differential < transform.position.x)
+        {
+            // Set sprite to face left
+            if(bossState == BossState.Rage){
+                spriteRenderer.sprite = sprites[3];
+            }else{
+                
+                spriteRenderer.sprite = sprites[1];
+            }
+            spriteRenderer.flipX = true;
+        }else if(Player.transform.position.x + differential > transform.position.x){
+            if(bossState == BossState.Rage){
+                spriteRenderer.sprite = sprites[3];
+            }else{
+                
+                spriteRenderer.sprite = sprites[1];
+            }
+            spriteRenderer.flipX = false;
+            // set sprite to face right
+        }else if(Player.transform.position.x < -differential && Player.transform.position.x > differential){
+            spriteRenderer.sprite = sprites[0];
+            // set sprite to face down
+        }
     }
 
     // Update is called once per frame
@@ -44,6 +76,8 @@ public class DeathbirdBehaviour : MonoBehaviour
             case BossState.Rage:
                 if (timeElapsed >= timeLimitRage)
                 {
+                    Debug.Log("Hello Rage");
+                    spriteRenderer.sprite = sprites[3];
                     timeElapsed = 0f;
                     bossState = BossState.Normal;
                     FeatherSpawner[] spawners = GetComponentsInChildren<FeatherSpawner>(true);
