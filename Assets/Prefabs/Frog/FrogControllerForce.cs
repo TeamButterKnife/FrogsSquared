@@ -154,7 +154,7 @@ public class FrogControllerForce : MonoBehaviour
         tongueObject.GetComponent<Rigidbody2D>().AddForce(GetFacingDirection(mousePointRelative)*10, ForceMode2D.Impulse);
         
         lineRenderer.enabled = true;
-        
+
         //RaycastHit2D hitCheck = Physics2D.Raycast(transform.position, GetFacingDirection(mousePointRelative), tongueLimit, LayerMask.GetMask("Ground"));
         //if (!(hitCheck.collider is null))
         //{
@@ -164,6 +164,7 @@ public class FrogControllerForce : MonoBehaviour
         //    frogSJ.connectedAnchor = hitCheck.transform.InverseTransformPoint(hitCheck.point);
         //    frogSJ.enabled = true;
         //}
+        AudioManager.instance.PlaySFX(17);
     }
 
     public Vector2 GetFacingDirection(Vector2 mouseRelativePosition)
@@ -222,6 +223,7 @@ public class FrogControllerForce : MonoBehaviour
     {
         //Debug.Log("I'm jumpsing");
         animator.SetBool("isJumping", true);
+        AudioManager.instance.PlaySFX(23);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -238,5 +240,22 @@ public class FrogControllerForce : MonoBehaviour
         {
             transform.parent = null;
         }
+    }
+
+    public void Steep1()
+    {
+        AudioManager.instance.PlaySFX(01);
+    }
+    public void Steep2()
+    {
+        AudioManager.instance.PlaySFX(02);
+    }
+    public void Steep3()
+    {
+        AudioManager.instance.PlaySFX(03);
+    }
+    public void Steep4()
+    {
+        AudioManager.instance.PlaySFX(04);
     }
 }

@@ -38,6 +38,7 @@ public class JumpingMushroom : MonoBehaviour
             theFrog.jump = 50;
             theFrog.frogRB.velocity = new Vector2(theFrog.frogRB.velocity.x, jumpingForceToAdd);
             jumpingLimitCounter = jumpingLimitTime;
+            AudioManager.instance.PlaySFX(22);
             anim.SetTrigger("bounceUP");
         }
     }

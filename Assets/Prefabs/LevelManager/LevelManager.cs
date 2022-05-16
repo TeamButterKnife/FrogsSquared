@@ -22,7 +22,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isActiveScene)
+       /* if (!isActiveScene)
         {
             // isActiveScene = SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel).isLoaded;
             // SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(gameManager.CurrentLevel));
@@ -49,6 +49,6 @@ public class LevelManager : MonoBehaviour
                 Debug.Log("activated the correct input");
                 isActiveScene = true;
             }
-        }
+        }*/
     }
 }
