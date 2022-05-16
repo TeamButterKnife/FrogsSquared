@@ -16,7 +16,7 @@ public class FollowPlayerNonTrigger : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, speed);
         transform.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

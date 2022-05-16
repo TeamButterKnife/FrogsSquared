@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 5c25d3bbfe97d7643961832f14871247
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ForceMovementTest.unity
     guid: 9bb52b592425186468b77ed80e12d4bd
   - enabled: 1
