@@ -26,11 +26,11 @@ public class MagicSky : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //unperformant emergency solution to game jam time problem
-        // if (cam is null)
-        // {
-        //     cam = transform.GetComponent<Camera>();
-        // }
+        // unperformant emergency solution to game jam time problem
+        if (cam is null)
+        {
+            cam = transform.GetComponent<Camera>();
+        }
         float secondsElapsed = (float)((DateTime.Now - startTime).TotalSeconds);
         float skyPercentage = (secondsElapsed / gameTimeLimit);
         // skyPercentage /= 100f;
