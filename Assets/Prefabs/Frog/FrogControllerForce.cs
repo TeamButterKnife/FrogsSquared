@@ -38,6 +38,16 @@ public class FrogControllerForce : MonoBehaviour
     private LineRenderer lineRenderer;
     private GameObject tongueObject;
 
+    /*
+    void Awake()
+    {
+    #   if UNITY_EDITOR
+        QualitySettings.vSyncCount = 0;  // VSync must be disabled
+        Application.targetFrameRate = 15;
+    #   endif
+    }
+    */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,7 +109,7 @@ public class FrogControllerForce : MonoBehaviour
         return movement;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         animator.SetFloat("speed", Mathf.Abs( GetComponent<Rigidbody2D>().velocity.x));
         Vector3 movement = GetMovement();
