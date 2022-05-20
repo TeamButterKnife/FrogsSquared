@@ -156,7 +156,7 @@ public class FrogControllerForce : MonoBehaviour
         //}
         
         //Subtracts mouse position from main character to get accurate values
-        Vector2 mousePointRelative = camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()) - transform.position;
+        Vector2 mousePointRelative = transform.InverseTransformPoint(camera.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
 
         Vector2 spawnPosition = new Vector2(transform.position.x, transform.position.y + transform.localScale.y/8) + GetFacingDirection(mousePointRelative)*0.5f;
 
@@ -179,46 +179,138 @@ public class FrogControllerForce : MonoBehaviour
 
     public Vector2 GetFacingDirection(Vector2 mouseRelativePosition)
     {
-       //Positive X and Y = Top and Right
-       //X > Y = Right
-       //Y > X = Top
+        //Positive X and Y = Top and Right
+        //X > Y = Right
+        //Y > X = Top
 
-       //Positive X and Negative Y = Right and Down
-       //X > Y = Right
-       //Y > X = Down
+        //Positive X and Negative Y = Right and Down
+        //X > Y = Right
+        //Y > X = Down
 
-       //Negative X and Y = Down and Left
-       //X > Y = Left
-       //Y > X = Down
+        //Negative X and Y = Down and Left
+        //X > Y = Left
+        //Y > X = Down
 
-       //Negative X and Positive Y = Left and Top
-       //X > Y = Left
-       //Y > X = Top
+        //Negative X and Positive Y = Left and Top
+        //X > Y = Left
+        //Y > X = Top
+
+        //if (Mathf.Abs(mouseRelativePosition.x) > Mathf.Abs(mouseRelativePosition.y))
+        //{ //Left or Right
+        //    if (mouseRelativePosition.x > 0)
+        //    {//Right
+        //        return Vector2.right;
+        //    }
+        //    else
+        //    {//Left
+        //        return Vector2.left;
+        //    }
+        //}
+        //else
+        //{ //Top or Down
+        //    if (mouseRelativePosition.y > 0)
+        //    {//Top
+        //        return Vector2.up;
+        //    }
+        //    else
+        //    {//Down
+        //        return Vector2.down;
+        //    }
+        //}
 
 
+        //The same code but now with rounding of 45 degrees.
+        Vector2 up_right = new Vector2(1, 1).normalized;
+        Vector2 down_right = new Vector2(1, -1).normalized;
+        Vector2 down_left = new Vector2(-1, -1).normalized;
+        Vector2 up_left = new Vector2(-1, 1).normalized;
 
-       if (Mathf.Abs(mouseRelativePosition.x) > Mathf.Asin(mouseRelativePosition.y))
-       { //Left or Right
-           if (mouseRelativePosition.x > 0)
-           {//Right
-               return Vector2.right;
-           }
-           else
-           {//Left
-               return Vector2.left;
-           }
-       }
-       else
-       { //Top or Down
-           if (mouseRelativePosition.y > 0)
-           {//Top
-               return Vector2.up;
-           }
-           else
-           {//Down
-               return Vector2.down;
-           }
-       }
+        //Directions of middle sections (this probably have a better solution than this crap) -> maybe a dictionary?
+        //Think of those as directions from this graph: https://i.imgur.com/piiy9xZ.png
+        //They are defined so I can choose the quadrants around the eith directions and round the values with that in mind
+        //Vector2 up_right_up = new Vector2(1, 2).normalized;
+        //Vector2 up_right_right = new Vector2(2, 1).normalized;
+        //Vector2 down_right_right = new Vector2(2, -1).normalized;
+        //Vector2 down_right_down = new Vector2(1, -2).normalized;
+        //Vector2 down_left_down = new Vector2(-1, -2).normalized;
+        //Vector2 down_left_left = new Vector2(-2, -1).normalized;
+        //Vector2 up_left_left = new Vector2(-2, 1).normalized;
+        //Vector2 up_left_up = new Vector2(-1, 2).normalized;
+
+        //Ok those turned out to be completely useless. Still going to leave them here commented because they could be useful
+
+        Vector2 mouseNorm = mouseRelativePosition.normalized;
+
+
+        if (mouseNorm.x > 0 && mouseNorm.y > 0)
+        { // First quadrant
+
+            if (Vector2.Dot(mouseNorm, up_right) < 0.90f && Vector2.Dot(mouseNorm, down_right) > -0.3f) 
+            {
+                return Vector2.right;
+            } 
+            else if (Vector2.Dot(mouseNorm, up_right) < 0.90f && Vector2.Dot(mouseNorm, down_right) < -0.3f)
+            {
+                return Vector2.up;
+            } 
+            else
+            {
+                return up_right;
+            }
+
+        } else if (mouseNorm.x > 0 && mouseNorm.y < 0)
+        { // Forth quadrant
+
+            if (Vector2.Dot(mouseNorm, down_right) < 0.90f && Vector2.Dot(mouseNorm, down_left) > -0.3f)
+            {
+                return Vector2.down;
+            }
+            else if (Vector2.Dot(mouseNorm, down_right) < 0.90f && Vector2.Dot(mouseNorm, down_left) < -0.3f)
+            {
+                return Vector2.right;
+            }
+            else
+            {
+                return down_right;
+            }
+
+        } else if (mouseNorm.x < 0 && mouseNorm.y < 0)
+        { //Third quadrant
+
+            if (Vector2.Dot(mouseNorm, down_left) < 0.90f && Vector2.Dot(mouseNorm, up_left) > -0.3f)
+            {
+                return Vector2.left;
+            }
+            else if (Vector2.Dot(mouseNorm, down_left) < 0.90f && Vector2.Dot(mouseNorm, up_left) < -0.3f)
+            {
+                return Vector2.down;
+            }
+            else
+            {
+                return down_left;
+            }
+
+        } else if (mouseNorm.x < 0 && mouseNorm.y > 0)
+        { //Second quadrant
+
+            if (Vector2.Dot(mouseNorm, up_left) < 0.90f && Vector2.Dot(mouseNorm, up_right) > -0.3f)
+            {
+                return Vector2.up;
+            }
+            else if (Vector2.Dot(mouseNorm, up_left) < 0.90f && Vector2.Dot(mouseNorm, up_right) < -0.3f)
+            {
+                return Vector2.left;
+            }
+            else
+            {
+                return up_left;
+            }
+
+        } else
+        { //SPECIFIC POSITIONS -> Almost impossible to happen, perfect clicks. Just return the value normalized
+            //This happens if the x or y are perfectly zero. This is really hard as those are float values.
+            return mouseNorm;
+        }
     }
 
     public void ActivateTongueSpring(ContactPoint2D contactPoint)
