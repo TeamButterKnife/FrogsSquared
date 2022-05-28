@@ -1,5 +1,5 @@
-# FrogsSquared
-Game Jam Research Team (TeamButterKnife) Game Jam 2.  The Froggenning.
+# SpaceOperaX
+Jam Garden scrum match!  Our capsule hero person must use gravity to make it to the end of the well without dying!  OH NOOOOO!  He's probably PRETTY BAD AT THAT!
 
-## Game Jam 2
-Welcome to TBK's second game jam!
+## Practice Jam
+This jam is a chance to practice stuff you might not get to practice if we actually cared about finishing the jam!
